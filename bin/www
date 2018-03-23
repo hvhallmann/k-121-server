@@ -7,7 +7,7 @@
 const app = require('../app');
 // to debug start the app with
 // DEBUG=myapp:* npm start
-const debug = require('debug')('waes-web:server');
+const debug = require('debug')('hall:server');
 const http = require('http');
 
 /**
@@ -89,4 +89,5 @@ function onListening() {
     ? `Pipe ${addr}`
     : `Port ${addr.port}`;
   debug(`Listening on ${bind}`);
+  console.log('Listening on 3000');
 }

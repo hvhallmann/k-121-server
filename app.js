@@ -4,11 +4,25 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+// const helmet = require('helmet');
 
 const index = require('./routes/index');
-const main = require('./routes/mainDiff');
+const person = require('./routes/person');
 
 const app = express();
+
+// app.use(helmet());
+
+// Set up mongoose connection
+const mongoose = require('mongoose');
+
+const devDbUrl = 'mongodb://127.0.0.1/secret_friend';
+const mongoDB = process.env.MONGODB_URI || devDbUrl;
+mongoose.connect(mongoDB);
+mongoose.Promise = global.Promise;
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,9 +36,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// enable CORS
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
 app.use('/', index);
-// Main route is here
-app.use('/v1', main);
+app.use('/person', person);
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
