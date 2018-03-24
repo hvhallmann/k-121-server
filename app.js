@@ -4,7 +4,7 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-// const helmet = require('helmet');
+const helmet = require('helmet');
 
 const index = require('./routes/index');
 const person = require('./routes/person');
@@ -12,7 +12,7 @@ const people = require('./routes/people');
 
 const app = express();
 
-// app.use(helmet());
+app.use(helmet());
 
 // Set up mongoose connection
 const mongoose = require('mongoose');
