@@ -23,8 +23,8 @@ const createTransport = nodemailer.createTransport({
   port: 587,
   secure: false, // true for 465, false for other ports
   auth: {
-    user: 'ep3zjnxbgftu7w3y@ethereal.email', // generated ethereal user
-    pass: 'wjUHJAG5gvDAe9SHxC', // generated ethereal password
+    user: process.env.USER_EMAIL || 'ep3zjnxbgftu7w3y@ethereal.email', // generated ethereal user
+    pass: process.env.MAIL_PASS || 'wjUHJAG5gvDAe9SHxC', // generated ethereal password
   },
 });
 

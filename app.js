@@ -5,6 +5,7 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
+const config = require('config');
 
 const index = require('./routes/index');
 const person = require('./routes/person');
@@ -17,8 +18,9 @@ app.use(helmet());
 // Set up mongoose connection
 const mongoose = require('mongoose');
 
-const devDbUrl = 'mongodb://127.0.0.1/secret_friend';
-const mongoDB = process.env.MONGODB_URI || devDbUrl;
+const dbConfig = config.get('dbConfig');
+// const devDbUrl = 'mongodb://127.0.0.1/secret_friend';
+const mongoDB = process.env.MONGODB_URI || dbConfig;
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
