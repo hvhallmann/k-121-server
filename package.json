@@ -29,7 +29,9 @@
     "helmet": "^3.10.0",
     "mongoose": "^4.4.11",
     "morgan": "~1.9.0",
+    "nodemailer": "^4.6.3",
     "pug": "2.0.0-beta11",
+    "scramble": "0.0.4",
     "serve-favicon": "~2.4.5",
     "supertest": "^3.0.0",
     "tape": "^4.8.0"
